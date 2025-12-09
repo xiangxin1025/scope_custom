@@ -13,6 +13,13 @@ enum MOTOR {
 }
 
 
+enum STATE{
+    //% block="Speed"
+    SPEED,
+    //% block="Direction"
+    DIR
+}
+
 enum DIRECTION {
     //% block="CW"
     CW = 0X00,
@@ -238,7 +245,7 @@ namespace xiamiBoard {
     /**
      * 获取旋转编码器数据
      */
-    //% weight=97
+    //% weight=96
     //% blockId=pinpong_readAngle block="obtain angle sensor data"
     export function readAngle():number{
         let value = pins.analogReadPin(AnalogReadWritePin.P2)
@@ -250,7 +257,7 @@ namespace xiamiBoard {
      * @param
      * @returns 
      */
-    //% weight=96
+    //% weight=95
     //% blockId=pinpong_readFlame block="get fire sensor number"
     export function readFlre(): number {
         let value = pins.analogReadPin(AnalogReadWritePin.P1)
