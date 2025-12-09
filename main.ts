@@ -86,7 +86,7 @@ namespace xiamiBoard {
      * 控制电机正反转和速度
      * @param motor 选择电机（M1/M2/M3/M4/全部）
      */
-    //% weight=98
+    //% weight=101
     //% blockId=ht7k_motor_run 
     //% block="HT7K1311 motor %motor | dir %dir | speed %speed"
     //% speed.min=0 speed.max=255
@@ -141,11 +141,11 @@ namespace xiamiBoard {
      * @param channel PCA9685 channel number (0-15); eg: 0, 1, 15
      * @param level Output level: 1 for high, 0 for low; eg: 1, 0
      */
-    //% blockId=Scope_setChannelLevel block="Set channel |%channel| output %level"
-    //% channel.min=0 channel.max=15
-    //% groups="Motor"
-    //% weight=90
-    export function setChannelLevel(channel: number, level: number): void {
+    // % blockId=Scope_setChannelLevel block="Set channel |%channel| output %level"
+    // % channel.min=0 channel.max=15
+    // % groups="Motor"
+    // % weight=99
+    function setChannelLevel(channel: number, level: number): void {
         if (!initialized) initPCA9685()
         if (channel < 0 || channel > 15) return
 
@@ -223,7 +223,7 @@ namespace xiamiBoard {
     /**
      * 控制交通灯
      */
-    //% weight=98
+    //% weight=97
     //% state.min=0 state.max=1
     //% state1.min=0 state1.max=1
     //% state2.min=0 state2.max=1
@@ -257,24 +257,12 @@ namespace xiamiBoard {
         return value
     }
 
-    /**
-     * 控制继电器
-     */
-    //% weight=93
-    //%blockId=pinpong_setRelay block="relay %state"
-    export function setRelay(state:RELAY){
-        switch (state) {
-            case RELAY.CLOSE: setChannelLevel( 2 ,  1 ); break;
-            case RELAY.DISCON: setChannelLevel( 2 , 0 ); break;
-            default: break;
-        }
-    }
-
+    
     /**
      * 获取超声波数据
-     */
-    //%weight=92
-    //% blockId=ultrasonic_sensor block="get ultrasonic sensor (cm)"
+    */
+   //%weight=93
+   //% blockId=ultrasonic_sensor block="get ultrasonic sensor (cm)"
     export function Ultrasonic(maxCmDistance = 500): number {
         let d
         pins.digitalWritePin(DigitalPin.P0, 1);
@@ -298,22 +286,20 @@ namespace xiamiBoard {
         }
         return Math.round(x) ;
     }
+    
+    /**
+     * 控制继电器
+     */
+    //% weight=92
+    //%blockId=pinpong_setRelay block="relay %state"
+    export function setRelay(state:RELAY){
+        switch (state) {
+            case RELAY.CLOSE: setChannelLevel( 2 ,  1 ); break;
+            case RELAY.DISCON: setChannelLevel( 2 , 0 ); break;
+            default: break;
+        }
+    }
 
-    // function mypulseIn(pin: DigitalPin, value: number, maxDuration: number): number {
-    //     let tick = control.micros();
-    //     let maxd = maxDuration;
-    //     while (pins.digitalReadPin(pin) != value) {
-    //         if (control.micros() - tick > maxd)
-    //             return 0;
-    //     }
-    //     let start = control.micros();
-    //     while (pins.digitalReadPin(pin) == value) {
-    //         if (control.micros() - tick > maxd)
-    //             return 0;
-    //     }
-    //     let end = control.micros();
-    //     return end - start;
-    // }
     
     /**
     * Initialize OLED, just put the module in the module at the beginning of the code, no need to reuse
@@ -741,7 +727,7 @@ namespace xiamiBoard {
      * init I2C
      */
     //% block="init xia_mi Board"
-    //% weight=101
+    //% weight=110
     export function initXiaMiBoard():void{
         //init();
         basic.pause(30)
