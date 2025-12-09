@@ -12,6 +12,7 @@
         "NecIR.cpp",
         "README.md",
         "_locales/zh/scope_custom-jsdoc-strings.json",
+        "_locales/zh/scope_custom-strings.json",
         "shims.d.ts",
         "enums.d.ts"
     ],
