@@ -139,11 +139,11 @@ namespace xiamiBoard {
 
         // 适配setPwm的0~4095限制：用100%/0%占空比实现高低电平
         if (level) {
-            // 高电平：ON=0，OFF=4095（占空比100%）
-            setPwm(channel, 0, 4095)
+            // 高电平：ON=0，OFF=4095（低电平占空比100%）
+            setPwm(channel, 0, 4096)
         } else {
-            // 低电平：ON=4095，OFF=0（占空比0%）
-            setPwm(channel, 4095, 0)
+            // 低电平：ON=4095，OFF=0（低电平占空比0%）
+            setPwm(channel, 4096, 0)
         }
     }
 
