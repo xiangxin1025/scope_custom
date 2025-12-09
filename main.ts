@@ -34,6 +34,8 @@ enum PARA{
 }
 
 namespace xiamiBoard {
+    let irstate:number;
+    let state:number;
     // ========== 常量定义（保留） ==========
     const PCA9685_ADDRESS = 0x40
     const MODE1 = 0x00
@@ -640,20 +642,6 @@ namespace xiamiBoard {
                 buf[2]=0x00;
                 pins.i2cWriteBuffer(0x38, buf)
             }
-        } else {
-            pins.i2cWriteBuffer(0x70, pins.createBufferFromArray(wordToByte(0x3517)));
-            basic.pause(5);  //wake up
-            pins.i2cWriteBuffer(0x70, pins.createBufferFromArray(wordToByte(0x805D)));
-            basic.pause(5);  //soft reset
-            // pins.i2cWriteBuffer(0x70, pins.createBufferFromArray(wordToByte(0xB098)));
-            // basic.pause(5);  //sleep
-            while(1) {
-                if(getShtc3DeviceID() != 0) {
-                    break;
-                }
-                basic.pause(1000);
-            }
-
         }
         
     }
