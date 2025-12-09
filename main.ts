@@ -33,6 +33,14 @@ enum PARA{
 
 }
 
+enum RELAY{
+    //% block="Actuation"
+    CLOSE = 0x01,
+    //% block="Release"
+    DISCON = 0x00
+}
+
+
 //094
 //1d8
 //1e3
@@ -47,7 +55,7 @@ namespace xiamiBoard {
     const PWM_CH = 0x06
     const PRESCALE = 0xFE
 
-    // 电机通道映射（枚举M1→索引0，M2→索引1... 一一对应）
+    // 电机通道映射 （枚举M1→索引0，M2→索引1... 一一对应）
     const MOTOR_CHANNELS = [
         [12, 11], // M1: [正转通道, 反转通道]
         [10, 9],  // M2
@@ -131,13 +139,13 @@ namespace xiamiBoard {
     /**
      * Set a channel output high or low level (as GPIO)
      * @param channel PCA9685 channel number (0-15); eg: 0, 1, 15
-     * @param level false for low level, true for high level; eg: true, false
+     * @param level Output level: 1 for high, 0 for low; eg: 1, 0
      */
     //% blockId=Scope_setChannelLevel block="Set channel |%channel| output %level"
     //% channel.min=0 channel.max=15
     //% groups="Motor"
     //% weight=90
-    export function setChannelLevel(channel: number, level: boolean): void {
+    export function setChannelLevel(channel: number, level: number): void {
         if (!initialized) initPCA9685()
         if (channel < 0 || channel > 15) return
 
@@ -213,9 +221,24 @@ namespace xiamiBoard {
     }
     
     /**
+     * 控制交通灯
+     */
+    //% weight=98
+    //% state.min=0 state.max=1
+    //% state1.min=0 state1.max=1
+    //% state2.min=0 state2.max=1
+    //% blockId=pinpong_LED block="set traffic lights Red LED %state Yellow LED %state1 Green LED %state2"
+    export function LED(state: number, state1: number, state2: number) {
+        setChannelLevel(5, state);//红灯
+        setChannelLevel(0, state1);//黄灯
+        setChannelLevel(1, state2);//绿灯
+
+    }
+
+    /**
      * 获取旋转编码器数据
      */
-    //% weight=88
+    //% weight=97
     //% blockId=pinpong_readAngle block="obtain angle sensor data"
     export function readAngle():number{
         let value = pins.analogReadPin(AnalogReadWritePin.P2)
@@ -227,14 +250,25 @@ namespace xiamiBoard {
      * @param
      * @returns 
      */
-    //% weight=89
+    //% weight=96
     //% blockId=pinpong_readFlame block="get fire sensor number"
     export function readFlre(): number {
         let value = pins.analogReadPin(AnalogReadWritePin.P1)
         return value
     }
 
-
+    /**
+     * 控制继电器
+     */
+    //% weight=93
+    //%blockId=pinpong_setRelay block="relay %state"
+    export function setRelay(state:RELAY){
+        switch (state) {
+            case RELAY.CLOSE: setChannelLevel( 2 ,  1 ); break;
+            case RELAY.DISCON: setChannelLevel( 2 , 0 ); break;
+            default: break;
+        }
+    }
 
     /**
      * 获取超声波数据
@@ -336,7 +370,7 @@ namespace xiamiBoard {
      * OLED  display string
      */
     //% weight=90
-    //% text.defl="DFRobot"
+    //% text.defl="Hello World"
     //% line.min=0 line.max=7
     //% column.min=0 column.max=15
     //% block="OLED show text %text on line %line column %column"
