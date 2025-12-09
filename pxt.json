@@ -13,7 +13,8 @@
         "README.md",
         "_locales/zh-cn/xugu_xia_mi_Board-strings.json",
         "_locales/zh-tw/xugu_xia_mi_Board-strings.json",
-        "shims.d.ts"
+        "shims.d.ts",
+        "enums.d.ts"
     ],
     "testFiles": [
         "test.ts"
