@@ -9,7 +9,9 @@
     "files": [
         "main.blocks",
         "main.ts",
-        "README.md"
+        "README.md",
+        "_locales/zh-cn/xugu_xia_mi_Board-strings.json",
+        "_locales/zh-tw/xugu_xia_mi_Board-strings.json"
     ],
     "testFiles": [
         "test.ts"
