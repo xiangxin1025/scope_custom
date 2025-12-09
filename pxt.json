@@ -11,7 +11,7 @@
         "main.ts",
         "NecIR.cpp",
         "README.md",
-        "_locales/zh/xugu_xia_mi_Board-strings.json",
+        "_locales/zh/scope_custom-jsdoc-strings.json",
         "shims.d.ts",
         "enums.d.ts"
     ],
