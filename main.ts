@@ -168,18 +168,18 @@ namespace xiamiBoard {
         control.waitMicros(5000)
         i2cwrite(PCA9685_ADDRESS, MODE1, oldmode | 0xA1)
     }
-    /**
-     * Set the PWM output of one channel
-     * @param channel PCA9685 channel number (0-15); eg: 0, 1, 15
-     * @param on PWM on time in microseconds (0 to 4096); 
-     * @param off PWM off time in microseconds (0 to 4096); 
-     */
-    //% weight=100
-    //% blockId=htsetpwm block="setpwm channel %channel|on %on|off %off"
-    //% channel.min=0 channel.max=15
-    //% on.min=0 on.max=4095
-    //% off.min=0 off.max=4095
-    export function setPwm(channel: number, on: number, off: number): void {
+    // /**
+    //  * Set the PWM output of one channel
+    //  * @param channel PCA9685 channel number (0-15); eg: 0, 1, 15
+    //  * @param on PWM on time in microseconds (0 to 4096); 
+    //  * @param off PWM off time in microseconds (0 to 4096); 
+    //  */
+    // //% weight=100
+    // //% blockId=htsetpwm block="setpwm channel %channel|on %on|off %off"
+    // //% channel.min=0 channel.max=15
+    // //% on.min=0 on.max=4095
+    // //% off.min=0 off.max=4095
+    function setPwm(channel: number, on: number, off: number): void {
         if (channel < 0 || channel > 15) return
         on = Math.clamp(0, 4095, on)
         off = Math.clamp(0, 4095, off)
@@ -208,6 +208,30 @@ namespace xiamiBoard {
         return pins.i2cReadNumber(addr, NumberFormat.UInt8BE)
     }
     
+    /**
+     * 获取旋转编码器数据
+     */
+    //% weight=88
+    //% blockId=pinpong_readAngle block="obtain angle sensor data"
+    export function readAngle():number{
+        let value = pins.analogReadPin(AnalogReadWritePin.P2)
+        return value
+    }
+
+    /**
+     * 获取火焰传感器数据
+     * @param
+     * @returns 
+     */
+    //% weight=89
+    //% blockId=pinpong_readFlame block="get fire sensor number"
+    export function readFlre(): number {
+        let value = pins.analogReadPin(AnalogReadWritePin.P1)
+        return value
+    }
+
+
+
     /**
      * 获取超声波数据
      */
