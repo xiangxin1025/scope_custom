@@ -52,7 +52,7 @@ enum RELAY{
 //1d8
 //1e3
 //% weight=100 color=#0fbc11 icon="" block="xia_mi Board"
-namespace xiamiBoard {
+namespace Board {
     let irstate:number;
     let state:number;
     // ========== 常量定义（保留） ==========
@@ -396,7 +396,7 @@ namespace xiamiBoard {
     //% block="OLED show number %n on line %line column %column"
 
     export function OLEDshowUserNumber(n: number,line: number, column:number): void {
-        xiamiBoard.OLEDshowUserText("" + n,line, column);
+        Board.OLEDshowUserText("" + n,line, column);
     }
 
     /**
@@ -731,9 +731,9 @@ namespace xiamiBoard {
     /**
      * init I2C
      */
-    //% block="init xia_mi Board"
+    //% block="init Board"
     //% weight=110
-    export function initXiaMiBoard():void{
+    export function initBoard():void{
         //init();
         basic.pause(30)
         // AHT20Init()
