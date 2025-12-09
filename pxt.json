@@ -13,7 +13,7 @@
         "ws2812b.ts",
         "sendBuffer.asm",
         "README.md",
-        "_locales/zh/scope_custom-strings.json",
+        "_locales/zh/xugu-strings.json",
         "shims.d.ts",
         "enums.d.ts"
     ],
