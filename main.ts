@@ -72,6 +72,7 @@ namespace xiamiBoard {
      * 控制电机正反转和速度
      * @param motor 选择电机（M1/M2/M3/M4/全部）
      */
+    //% weight=98
     //% blockId=ht7k_motor_run 
     //% block="HT7K1311 motor %motor | dir %dir | speed %speed"
     //% speed.min=0 speed.max=255
