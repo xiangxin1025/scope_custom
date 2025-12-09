@@ -134,21 +134,16 @@ namespace xiamiBoard {
     //% groups="Motor"
     //% weight=90
     export function setChannelLevel(channel: number, level: boolean): void {
-        if (!initialized) {
-            initPCA9685()
-        }
+        if (!initialized) initPCA9685()
+        if (channel < 0 || channel > 15) return
 
-        if (channel < 0 || channel > 15) {
-            return; // 通道号超出范围直接返回
-        }
-
-        // 根据PCA9685特性，设置完全开启或完全关闭
+        // 适配setPwm的0~4095限制：用100%/0%占空比实现高低电平
         if (level) {
-            // 高电平：ON=4096, OFF=0 (特殊值，表示常开)
-            setPwm(channel, 4096, 0)
+            // 高电平：ON=0，OFF=4095（占空比100%）
+            setPwm(channel, 0, 4095)
         } else {
-            // 低电平：ON=0, OFF=4096 (特殊值，表示常闭)
-            setPwm(channel, 0, 4096)
+            // 低电平：ON=4095，OFF=0（占空比0%）
+            setPwm(channel, 4095, 0)
         }
     }
 
@@ -173,7 +168,13 @@ namespace xiamiBoard {
         control.waitMicros(5000)
         i2cwrite(PCA9685_ADDRESS, MODE1, oldmode | 0xA1)
     }
-
+    /**
+     * Set the PWM output of one channel
+     * @param channel PCA9685 channel number (0-15); eg: 0, 1, 15
+     * @param on PWM on time in microseconds (0 to 4096); 
+     * @param off PWM off time in microseconds (0 to 4096); 
+     */
+    //% weight=100
     //% blockId=htsetpwm block="setpwm channel %channel|on %on|off %off"
     //% channel.min=0 channel.max=15
     //% on.min=0 on.max=4095
