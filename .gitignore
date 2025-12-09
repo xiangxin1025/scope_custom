@@ -12,3 +12,5 @@ _site
 .simstate.json
 package.json
 package-lock.json
+_locales/scope_custom-jsdoc-strings.json
+_locales/scope_custom-strings.json

@@ -10,6 +10,8 @@
         "main.blocks",
         "main.ts",
         "NecIR.cpp",
+        "ws2812b.ts",
+        "sendBuffer.asm",
         "README.md",
         "_locales/zh/scope_custom-strings.json",
         "shims.d.ts",
