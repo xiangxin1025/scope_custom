@@ -51,7 +51,7 @@ enum RELAY{
 //094
 //1d8
 //1e3
-//% weight=100 color=#cfccc1 icon="" block="Board"
+//% weight=100 color=#B8383D icon="" block="Board"
 namespace Board {
     let irstate:number;
     let state:number;
