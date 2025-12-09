@@ -254,8 +254,6 @@ namespace xiamiBoard {
 
     /**
      * 获取火焰传感器数据
-     * @param
-     * @returns 
      */
     //% weight=95
     //% blockId=pinpong_readFlame block="get fire sensor number"
