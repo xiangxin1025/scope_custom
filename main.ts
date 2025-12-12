@@ -270,20 +270,20 @@ namespace Board {
    //% blockId=ultrasonic_sensor block="get ultrasonic sensor (cm)"
     export function Ultrasonic(maxCmDistance = 500): number {
         let d
-        pins.digitalWritePin(DigitalPin.P0, 1);
+        pins.digitalWritePin(DigitalPin.P16, 1);
         basic.pause(1)
-        pins.digitalWritePin(DigitalPin.P0, 0);
-        if (pins.digitalReadPin(DigitalPin.P1) == 0) {
-            pins.digitalWritePin(DigitalPin.P0, 0);
+        pins.digitalWritePin(DigitalPin.P16, 0);
+        if (pins.digitalReadPin(DigitalPin.P12) == 0) {
+            pins.digitalWritePin(DigitalPin.P16, 0);
             //sleep_us(2);
-            pins.digitalWritePin(DigitalPin.P0, 1);
+            pins.digitalWritePin(DigitalPin.P16, 1);
             // sleep_us(10);
-            pins.digitalWritePin(DigitalPin.P0, 0);
-            d = pins.pulseIn(DigitalPin.P1, PulseValue.High, maxCmDistance * 58)//readPulseIn(1);
+            pins.digitalWritePin(DigitalPin.P16, 0);
+            d = pins.pulseIn(DigitalPin.P12, PulseValue.High, maxCmDistance * 58)//readPulseIn(1);
         } else {
-            pins.digitalWritePin(DigitalPin.P0, 1);
-            pins.digitalWritePin(DigitalPin.P0, 0);
-            d = pins.pulseIn(DigitalPin.P1, PulseValue.Low, maxCmDistance * 58);//readPulseIn(0);
+            pins.digitalWritePin(DigitalPin.P16, 1);
+            pins.digitalWritePin(DigitalPin.P16, 0);
+            d = pins.pulseIn(DigitalPin.P12, PulseValue.Low, maxCmDistance * 58);//readPulseIn(0);
         }
         let x = d / 59;
         if (x <= 0 || x > 500) {
